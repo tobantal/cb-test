@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: dev
+camel.springboot.shutdownTimeout: 2
+
+server:
+  port : 8080
+  
+person-validator:
+  mobile-pattern: "\\d{3}-\\d{3}-\\d{2}-\\d{2}"
+  birth-date-pattern: "\\d{2}\\.\\d{2}\\.\\d{4}"
+  birth-date-format: "dd.MM.yyyy"
+  email-pattern: "^(.{1,30})(\\@)(.{1,10})$"
+
+
+---
+
+spring:
+  profiles: dev
+
+startRoute: timer:automover?period=10s
+fromRouteFlag: file:work/*.ready?delete=true&readLock=none
+fromRoute: file:work?delete=true&readLock=none
+toRoute1: file:data?fileName=${header.fileName}
+
+

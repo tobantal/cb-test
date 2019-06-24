@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.title}"></title>
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/_variables.scss}" />
+<link rel="stylesheet" th:href="@{/css/_bootswatch.scss}" />
+</head>
+
+<body>
+	<div class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<ul class="navbar-nav">
+
+			<li class="nav-item"><a href="#" th:href="@{/person/info}"
+				class="nav-link" th:text="#{person.title}"></a></li>
+
+			<li class="nav-item"><a class="nav-link" href="#"
+				th:href="@{/person/create}" th:text="#{person.add-more-persons}"></a></li>
+
+			<li class="nav-item"><a href="#" th:href="@{/work/info}"
+				class="nav-link" th:text="#{work.title}"></a></li>
+
+			<li class="nav-item"><a class="nav-link" href="#"
+				th:href="@{/work/create}" th:text="#{work.add-more-works}"></a></li>
+		</ul>
+	</div>
+
+	<h1 th:text="#{person.add-more-persons}" style="margin-left: 10px"></h1>
+	<div class="bs-docs-section"
+		style="width: 100%; text-align: center; margin-top: 20px;">
+		<!-- form -->
+		<div class="bs-component" style="display: inline-block; width: 60%">
+			<div class="card border-secondary ">
+
+				<div class="card-body">
+
+					<form action="#" th:action="@{/person/add}" th:object="${person}"
+						method="POST">
+
+						<!-- last name -->
+						<div class="form-group ">
+							<label class="form-control-label" th:text="#{person.last-name}" /></label>
+
+							<input class="form-control" type="text" th:field="*{lastName}"
+								required th:errorclass="has-error" th:placeholder="#{placeholder.last-name}"/>
+
+							<div th:if="${#fields.hasErrors('lastName')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('lastName')}"
+										th:text="${err}" style="color: red" />
+								</ul>
+							</div>
+
+						</div>
+
+						<!-- first name -->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{person.first-name}" /></label>
+
+							<input class="form-control" type="text" th:field="*{firstName}"
+								required th:errorclass="has-error" th:placeholder="#{placeholder.first-name}"/>
+
+							<div th:if="${#fields.hasErrors('firstName')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('firstName')}"
+										th:text="${err}" style="color: red" />
+								</ul>
+							</div>
+						</div>
+
+						<!-- work-phone -->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{person.work-phone}" /></label>
+							<input class="form-control" type="text" th:field="*{workPhone}"
+								required th:errorclass="has-error" th:placeholder="#{placeholder.phone}"/>
+
+							<div th:if="${#fields.hasErrors('workPhone')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('workPhone')}"
+										th:text="${err}" style="color: red" />
+								</ul>
+							</div>
+						</div>
+
+						<!-- mobile-phone -->
+						<div class="form-group">
+							<label class="form-control-label"
+								th:text="#{person.mobile-phone}" /></label> <input class="form-control"
+								type="text" th:field="*{mobilePhone}" required
+								th:errorclass="has-error" th:placeholder="#{placeholder.phone}"/>
+
+							<div th:if="${#fields.hasErrors('mobilePhone')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('mobilePhone')}"
+										th:text="${err}" style="color: red" />
+								</ul>
+							</div>
+						</div>
+
+
+						<!-- email -->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{person.email}" /></label> <input
+								class="form-control" type="text" th:field="*{email}" required
+								th:errorclass="has-error" th:placeholder="#{placeholder.email}"/>
+
+							<div class="valid-feedback" th:if="${#fields.hasErrors('email')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('email')}" th:text="${err}"
+										style="color: red" />
+								</ul>
+							</div>
+						</div>
+
+						<!-- birth-date -->
+						<div class="form-group">
+							<label class="form-control-label" th:text="#{person.birth-date}" /></label>
+							<input class="form-control" type="text" th:field="*{birthDate}"
+								required th:errorclass="has-error" th:placeholder="#{placeholder.birth-date}"/>
+
+							<div th:if="${#fields.hasErrors('birthDate')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('birthDate')}"
+										th:text="${err}" style="color: red" />
+								</ul>
+							</div>
+						</div>
+
+						<input type="submit" th:value="#{person.form.add}"
+							class="btn btn-primary" /> <a href="#"
+							th:href="@{/person/clear/?fileName={fileName}(fileName=${fileName})}"
+							th:text="#{person.form.clear}" class="btn btn-danger"></a> <a
+							href="#"
+							th:href="@{/person/push/?fileName={fileName}(fileName=${fileName})}"
+							th:text="#{person.form.push}" class="btn btn-success"></a>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
