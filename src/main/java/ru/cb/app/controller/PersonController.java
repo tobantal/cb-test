@@ -22,9 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import ru.cb.app.dao.PersonService;
 import ru.cb.app.domain.Person;
 import ru.cb.app.service.FileManager;
+import ru.cb.app.service.PersonService;
 
 @Controller
 @RequestMapping("person")

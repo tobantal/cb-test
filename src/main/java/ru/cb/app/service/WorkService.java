@@ -1,4 +1,4 @@
-package ru.cb.app.dao;
+package ru.cb.app.service;
 
 import java.util.List;
 import java.util.Optional;

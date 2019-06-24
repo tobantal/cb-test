@@ -18,7 +18,7 @@ import ru.cb.app.domain.Person;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@DisplayName("Класс должен ")
+@DisplayName("PersonValidator должен ")
 @Import(PersonValidator.class)
 class PersonValidatorTest {
 

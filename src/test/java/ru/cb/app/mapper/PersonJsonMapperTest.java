@@ -10,7 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @Import(PersonJsonMapper.class)
 @ExtendWith(SpringExtension.class)
-@DisplayName("Маппер должен ")
+@DisplayName("PersonJsonMapper должен ")
 class PersonJsonMapperTest {
 	
 	@Autowired
@@ -20,6 +20,8 @@ class PersonJsonMapperTest {
 	@Test
 	void testPersonToJsonString() {
 		
+		//{"id":3,"lastName":"Mikhailov","firstName":"Oleg","workPhone":"555-555-55-55","mobilePhone":"555-555-55-55","email":"a@a","birthDate":"09.09.2000","company":"SOft+"}
+		//String jsonString = "{\\"id\\":null,\\"lastName\\":\\"Mikhailov\\",\\"firstName\\":\\"Oleg\\",\\"workPhone\\":\\"555-555-55-55\\",\\"mobilePhone\":\"555-555-55-55\",\"email\":\"a@a\",\"birthDate\":\"09.09.2000\",\"company\":null}"'
 		//fail("Not yet implemented");
 	}
 

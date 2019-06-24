@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
-import ru.cb.app.dao.PersonService;
-import ru.cb.app.dao.WorkService;
 import ru.cb.app.domain.Person;
 import ru.cb.app.mapper.PersonJsonMapper;
+import ru.cb.app.service.PersonService;
+import ru.cb.app.service.WorkService;
 import ru.cb.app.validator.PersonValidator;
 
 @Component("extendedDataProcessor")

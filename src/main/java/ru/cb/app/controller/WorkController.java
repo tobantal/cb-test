@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ru.cb.app.dao.WorkService;
 import ru.cb.app.domain.Work;
+import ru.cb.app.service.WorkService;
 
 @Controller
 @RequestMapping("work")

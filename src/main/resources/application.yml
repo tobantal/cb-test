@@ -5,7 +5,12 @@ camel.springboot.shutdownTimeout: 2
 
 server:
   port : 8080
-  
+
+camel-route: 
+  prepare-path: "prepare"
+  work-path: "work"
+  data-path: "data"
+
 person-validator:
   mobile-pattern: "\\d{3}-\\d{3}-\\d{2}-\\d{2}"
   birth-date-pattern: "\\d{2}\\.\\d{2}\\.\\d{4}"
