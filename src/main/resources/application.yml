@@ -1,6 +1,7 @@
 spring:
   profiles:
     active: dev
+
 camel.springboot.shutdownTimeout: 2
 
 server:
@@ -21,11 +22,6 @@ person-validator:
 
 spring:
   profiles: dev
-
-startRoute: timer:automover?period=10s
-fromRouteFlag: file:work/*.ready?delete=true&readLock=none
-fromRoute: file:work?delete=true&readLock=none
-toRoute1: file:data?fileName=${header.fileName}
 
 ---
 spring:
