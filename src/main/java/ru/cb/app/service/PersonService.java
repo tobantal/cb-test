@@ -12,8 +12,8 @@ public class PersonService {
 	
 	private PersonRepository personRepository;
 
-	public PersonService(PersonRepository telephoneBookRepository) {
-		this.personRepository = telephoneBookRepository;
+	public PersonService(PersonRepository personRepository) {
+		this.personRepository = personRepository;
 	}
 	
 	public void save(Person person) {
