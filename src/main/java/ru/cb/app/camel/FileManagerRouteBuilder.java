@@ -12,18 +12,6 @@ public class FileManagerRouteBuilder extends RouteBuilder {
 	private String workPath;
 	private String dataPath;
 
-	public void setPreparePath(String preparePath) {
-		this.preparePath = preparePath;
-	}
-
-	public void setWorkPath(String workPath) {
-		this.workPath = workPath;
-	}
-
-	public void setDataPath(String dataPath) {
-		this.dataPath = dataPath;
-	}
-
 	@Override
 	public void configure() throws Exception {
 		from("direct:prepare").to("bean:personJsonMapper?method=personToJsonString")

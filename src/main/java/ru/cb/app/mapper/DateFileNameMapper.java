@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DateFileNameMapper {
-	
-	private static final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy_hhmm"); 
-	
+
+	private final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy_hhmm");
+
 	public String dateToFileName(Date date, String prefix, String suffix) {
 		return String.join("", prefix, formatter.format(date), suffix);
 	}

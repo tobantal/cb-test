@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Component("readyFileProcessor")
 public class ReadyFileProcessor implements Processor {
 
-	private static final Logger logger = LoggerFactory.getLogger(ReadyFileProcessor.class);
+	private final Logger logger = LoggerFactory.getLogger(ReadyFileProcessor.class);
 
 	@Override
 	public void process(Exchange exchange) {
 		try {
-		       String flagFileName = exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
-		       String fileName = flagFileName.substring(1, flagFileName.length()-7) + ".txt";
+		       final String flagFileName = exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
+		       final String fileName = flagFileName.substring(1, flagFileName.length()-7) + ".txt";
 		       exchange.getIn().setHeader("fileName", fileName);
 		       logger.info("file {} is ready", fileName);
 		} catch(Exception e) {

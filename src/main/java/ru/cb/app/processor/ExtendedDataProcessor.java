@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 
+import lombok.RequiredArgsConstructor;
 import ru.cb.app.domain.Person;
 import ru.cb.app.mapper.PersonJsonMapper;
 import ru.cb.app.service.PersonService;
@@ -15,37 +16,31 @@ import ru.cb.app.service.WorkService;
 import ru.cb.app.validator.PersonValidator;
 
 @Component("extendedDataProcessor")
+@RequiredArgsConstructor
 public class ExtendedDataProcessor implements Processor {
 
 	private static final Logger logger = LoggerFactory.getLogger(ExtendedDataProcessor.class);
 
-	private PersonJsonMapper mapper;
-	private WorkService workService;
-	private PersonValidator personValidator;
-	private PersonService personService;
-
-	public ExtendedDataProcessor(PersonJsonMapper mapper, WorkService workService, PersonValidator personValidator,
-			PersonService personService) {
-		this.mapper = mapper;
-		this.workService = workService;
-		this.personValidator = personValidator;
-		this.personService = personService;
-	}
+	private final PersonJsonMapper mapper;
+	private final WorkService workService;
+	private final PersonValidator personValidator;
+	private final PersonService personService;
 
 	@Override
-	public void process(Exchange exchange) throws Exception {
+	public void process(Exchange exchange) {
+        String jsonString = null;
 		try {
-			String jsonString = exchange.getIn().getBody(String.class);
-			Person person = mapper.jsonStringToPerson(jsonString);
+			jsonString = exchange.getIn().getBody(String.class);
+			final Person person = mapper.jsonStringToPerson(jsonString);
 
-			Errors errors = new BeanPropertyBindingResult(person, "person");
+			final Errors errors = new BeanPropertyBindingResult(person, "person");
 			personValidator.validate(person, errors);
 			if (!errors.getAllErrors().isEmpty()) {
 				logger.error("Validation Error: {}", jsonString);
 				return;
 			}
 
-			String company = workService.findCompanyByPerson(person);
+			final String company = workService.findCompanyByPerson(person);
 			person.setCompany(company);
 
 			personService.save(person);
@@ -54,7 +49,7 @@ public class ExtendedDataProcessor implements Processor {
 			jsonString = mapper.personToJsonString(person);
 			exchange.getIn().setBody(jsonString);
 			logger.info("extendedDataProcessor finished");
-			
+
 		} catch (Exception e) {
 			logger.error("process error: {}", e.getMessage());
 			throw new RuntimeException(e);
