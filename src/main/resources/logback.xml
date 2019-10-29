@@ -28,7 +28,7 @@
                 ${LOG_PATH}/archived/log_%d{dd-MM-yyyy}.log
             </fileNamePattern>
             <maxHistory>10</maxHistory>
-            <totalSizeCap>100MB</totalSizeCap>
+            <totalSizeCap>20MB</totalSizeCap>
         </rollingPolicy>
 
     </appender>
