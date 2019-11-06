@@ -14,7 +14,6 @@ import ru.cb.app.domain.Person;
 import ru.cb.app.mapper.DateFileNameMapper;
 
 @Service
-// @RequiredArgsConstructor
 public class FileManager implements DisposableBean {
 
     private static final Logger logger = LoggerFactory.getLogger(FileManager.class);

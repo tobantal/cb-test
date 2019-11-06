@@ -2,7 +2,6 @@ package ru.cb.app.camel;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Processor;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.util.jndi.JndiContext;
@@ -63,13 +62,7 @@ public class CamelConfig {
     public CamelContext camelContext(JndiContext jndiContext, RouteBuilder routeBuilder) throws Exception {
         final DefaultCamelContext camelContext = new DefaultCamelContext(jndiContext);
         camelContext.addRoutes(routeBuilder);
-        //camelContext.start();
         return camelContext;
-    }
-
-    @Bean
-    public ProducerTemplate producerTemplate(CamelContext camelContext) {
-        return camelContext.createProducerTemplate();
     }
 
 }
