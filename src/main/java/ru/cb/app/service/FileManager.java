@@ -7,6 +7,7 @@ import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import ru.cb.app.domain.Person;
 import ru.cb.app.mapper.DateFileNameMapper;
 
 @Service
-public class FileManager {
+public class FileManager implements DisposableBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileManager.class);
 
@@ -25,8 +26,8 @@ public class FileManager {
 	public FileManager(DateFileNameMapper dateFileNameMapper,
 			@Qualifier("fileMaganerCamelContext") CamelContext camelContext) throws Throwable {
 		this.dateFileNameMapper = dateFileNameMapper;
-		producerTemplate = camelContext.createProducerTemplate();
-		camelContext.start();
+        producerTemplate = camelContext.createProducerTemplate();
+        camelContext.start();
 	}
 
 	public String createPrepareFile(Person person) {
@@ -55,6 +56,12 @@ public class FileManager {
 			logger.error("CamelExecutionException to delete file {}: {}", prepareFile, cee.getMessage());
 		}
 
+	}
+
+	@Override
+	public void destroy() throws Exception {
+        producerTemplate.stop();
+        producerTemplate.getCamelContext().stop();
 	}
 
 }
