@@ -63,7 +63,7 @@ public class CamelConfig {
     public CamelContext camelContext(JndiContext jndiContext, RouteBuilder routeBuilder) throws Exception {
         final DefaultCamelContext camelContext = new DefaultCamelContext(jndiContext);
         camelContext.addRoutes(routeBuilder);
-        camelContext.start();
+        //camelContext.start();
         return camelContext;
     }
 
