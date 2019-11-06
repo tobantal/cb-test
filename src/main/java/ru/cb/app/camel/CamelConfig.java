@@ -1,6 +1,4 @@
-package ru.cb.app.config;
-
-import java.util.Hashtable;
+package ru.cb.app.camel;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Processor;
@@ -30,7 +28,7 @@ public class CamelConfig {
             @Qualifier("changeFileNameProcessor") Processor changeFileNameProcessor,
             @Qualifier("readyFileProcessor") Processor readyFileProcessor,
             @Qualifier("extendedDataProcessor") Processor extendedDataProcessor) throws Exception {
-        final JndiContext jndiContext = new JndiContext(new Hashtable<String, Object>());
+        final JndiContext jndiContext = new JndiContext();
         jndiContext.bind("personJsonMapper", personJsonMapper);
         jndiContext.bind("changeFileNameProcessor", changeFileNameProcessor);
         jndiContext.bind("readyFileProcessor", readyFileProcessor);
