@@ -19,7 +19,7 @@ public class ChangeFileNameProcessor implements Processor {
 		try {
 			final String dateString = new SimpleDateFormat("ddMMyy_hhmm").format(new Date());
 			final String fileName = String.join("", "json_", dateString, ".txt");
-			final String flagFileName = String.join("", "<json_", dateString, ">.ready");
+			final String flagFileName = String.join("", "(json_", dateString, ").ready");
 
 			exchange.getIn().setHeader("fileName", fileName);
 			exchange.getIn().setHeader("flagFileName", flagFileName);

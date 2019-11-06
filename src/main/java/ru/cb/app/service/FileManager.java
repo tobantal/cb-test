@@ -11,10 +11,12 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import ru.cb.app.domain.Person;
 import ru.cb.app.mapper.DateFileNameMapper;
 
 @Service
+@RequiredArgsConstructor
 public class FileManager implements DisposableBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileManager.class);
@@ -23,12 +25,14 @@ public class FileManager implements DisposableBean {
 
 	private final DateFileNameMapper dateFileNameMapper;
 
+    /*
 	public FileManager(DateFileNameMapper dateFileNameMapper,
 			@Qualifier("fileMaganerCamelContext") CamelContext camelContext) throws Throwable {
 		this.dateFileNameMapper = dateFileNameMapper;
         producerTemplate = camelContext.createProducerTemplate();
         camelContext.start();
-	}
+    }
+    */
 
 	public String createPrepareFile(Person person) {
 		final String prepareFile = dateFileNameMapper.dateToFileName(new Date(), "data_", ".json");
@@ -55,13 +59,12 @@ public class FileManager implements DisposableBean {
 		} catch(CamelExecutionException cee) {
 			logger.error("CamelExecutionException to delete file {}: {}", prepareFile, cee.getMessage());
 		}
-
 	}
 
 	@Override
 	public void destroy() throws Exception {
-        producerTemplate.stop();
-        producerTemplate.getCamelContext().stop();
+        //producerTemplate.stop();
+        //producerTemplate.getCamelContext().stop();
 	}
 
 }

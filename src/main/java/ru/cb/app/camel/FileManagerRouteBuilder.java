@@ -4,8 +4,11 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component("routeBuilder")
-@ConfigurationProperties("camel-route")
+import lombok.Setter;
+
+//@Component("routeBuilder")
+//@ConfigurationProperties("camel-route")
+//@Setter
 public class FileManagerRouteBuilder extends RouteBuilder {
 
 	private String preparePath;

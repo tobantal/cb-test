@@ -6,7 +6,7 @@ import org.apache.camel.util.jndi.JndiContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("fileMaganerCamelContext")
+//@Component("fileMaganerCamelContext")
 public class FileMaganerCamelContext extends DefaultCamelContext {
 
 	public FileMaganerCamelContext(@Qualifier("jndiContext") JndiContext jndiContext,
