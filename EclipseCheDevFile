@@ -24,16 +24,35 @@ components:
     alias: tools
     image: 'quay.io/eclipse/che-java8-maven:nightly'
     env:
-      - value: $(JAVA_OPTS)
-        name: MAVEN_OPTS
       - value: >-
           -XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4
           -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true
           -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/user
         name: JAVA_OPTS
+      - value: $(JAVA_OPTS)
+        name: MAVEN_OPTS
 apiVersion: 1.0.0
 commands:
+  - name: maven build
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
+        type: exec
+        command: mvn clean install
+        component: tools
+  - name: sh
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
+        type: exec
+        command: sh
+        component: tools
+  - name: stop webapp
+    actions:
+      - type: exec
+        command: >-
+          echo 'Stopping the application...' && kill $(pidof java) && echo 'The
+          application has been successfully stopped'
+        component: tools
   - name: git log
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
@@ -64,17 +83,17 @@ commands:
             }]
           }
         type: vscode-launch
-  - name: maven build
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
-        type: exec
-        command: mvn clean install
-        component: tools
   - name: git status
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
         type: exec
         command: git status
+        component: tools
+  - name: run webapp
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
+        type: exec
+        command: 'mvn spring-boot:run'
         component: tools
   - name: git add-commit-push
     actions:
@@ -83,17 +102,4 @@ commands:
         command: >-
           git add . && git commit -m 'commit from OpenShift Eclipse Che' && git
           push 'https://github.com/tobantal/cb-test.git'
-        component: tools
-  - name: run webapp
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/cb-test'
-        type: exec
-        command: 'mvn spring-boot:run'
-        component: tools
-  - name: stop webapp
-    actions:
-      - type: exec
-        command: >-
-          echo 'Stopping the application...' && kill $(pidof java) && echo 'The
-          application has been successfully stopped'
         component: tools
