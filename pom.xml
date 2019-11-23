@@ -103,7 +103,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- AssetrtJ -->
+		<!-- AssertJ -->
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
