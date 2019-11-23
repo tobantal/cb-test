@@ -1,17 +1,9 @@
 package ru.cb.app.mapper;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
+public interface DateFileNameMapper {
 
-@Component
-public class DateFileNameMapper {
-
-	private final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy_hhmm");
-
-	public String dateToFileName(Date date, String prefix, String suffix) {
-		return String.join("", prefix, formatter.format(date), suffix);
-	}
+    String dateToFileName(Date date, String prefix, String suffix);
 
 }
