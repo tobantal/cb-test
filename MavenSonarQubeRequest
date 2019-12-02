@@ -1,0 +1,5 @@
+mvn sonar:sonar \
+  -Dsonar.login=5d5978e7a41572dde972629e3ac825feb3df4094 \ 
+  -Dsonar.projectName=cb-test \
+  -Dsonar.projectKey=cb-test \
+  -Dsonar.host.url=http://192.168.146.148:9000
